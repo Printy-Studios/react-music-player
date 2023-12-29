@@ -3,6 +3,7 @@ body, html {
   
   margin: 0px;
 
+  height: 100vh;
 }
 
 .icon {
@@ -14,6 +15,13 @@ body, html {
   transition: transform 0.1s ease-in-out;
 }
 
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .icon:hover {
   transform: scale(105%);
 }
@@ -21,3 +29,44 @@ body, html {
 .icon:active {
   transform: scale(70%);
 }
+
+.music-player {
+  display: flex;
+  align-items: center;
+}
+
+/* Slider */
+
+.slider {
+  -webkit-appearance: none;
+  flex-grow: 1;
+  height: 2px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+

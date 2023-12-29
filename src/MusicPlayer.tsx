@@ -12,8 +12,10 @@ export default function MusicPlayer() {
     }
 
     return (
-        <div>
+        <div className='music-player'>
+            
             <PlayButton onClick={onPlayButtonClick} playing={musicPlayer.isPlaying} />
+            <input type="range" min="1" max="100" defaultValue="50" className="slider"/>
         </div>
     )
 

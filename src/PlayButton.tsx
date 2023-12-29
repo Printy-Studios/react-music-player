@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import IconButton from './IconButton'
 // import PlayIcon from 'icons/play.svg';
 // import PauseIcon from 'pause.svg';
 
@@ -11,15 +12,10 @@ type PlayButtonProps = {
 export default function PlayButton({ onClick, playing }: PlayButtonProps) {
 
     return (
-        <div
+        <IconButton
             onClick={onClick}
-        >
-            {
-                playing ? 
-                <img className='icon' src={'icons/pause.svg'} /> : 
-                <img className='icon' src={'icons/play.svg'} />
-            }
-        </div>
+            src={playing ? 'icons/pause.svg' : 'icons/play.svg'}
+        />
     )
         
     

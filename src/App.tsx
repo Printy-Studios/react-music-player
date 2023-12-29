@@ -4,7 +4,7 @@ import MusicPlayer from './MusicPlayer';
 function App() {
 
   return (
-    <div className='app'>
+    <div>
       <MusicPlayer />
     </div>
   );
