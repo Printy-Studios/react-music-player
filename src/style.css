@@ -7,8 +7,8 @@ body, html {
 }
 
 .icon {
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
 
   cursor: pointer;
 
@@ -30,9 +30,15 @@ body, html {
   transform: scale(70%);
 }
 
+.player-wrapper {
+  max-width: 280px;
+  width: 100%;
+}
+
 .music-player {
   display: flex;
   align-items: center;
+  gap: 4px;
 }
 
 /* Slider */
@@ -40,8 +46,9 @@ body, html {
 .slider {
   -webkit-appearance: none;
   flex-grow: 1;
-  height: 2px;
+  height: 4px;
   background: #d3d3d3;
+  border-radius: 100px;
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
