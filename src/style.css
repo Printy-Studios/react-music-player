@@ -17,3 +17,7 @@ body, html {
 .icon:hover {
   transform: scale(105%);
 }
+
+.icon:active {
+  transform: scale(70%);
+}

@@ -432,6 +432,16 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@printy/react-persist-state@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@printy/react-persist-state/-/react-persist-state-0.0.2.tgz#b88452cfe89431dff1680c5f5a8e279c070e860b"
+  integrity sha512-dw6lv48e9OHn93HcYMF6dzxwoiJnVhinNJt2JgIz0zjkEkVevEWjuS1HHfKAkpBhpSgB2AhPpCMgRi5rnY+U+Q==
+
+"@printy/react-tab-state@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@printy/react-tab-state/-/react-tab-state-2.2.1.tgz#32f889fbbb9350df8a2864de6d99bd5c4ae9d362"
+  integrity sha512-VH6wbT6raZWfZKqy43/vNKzDfi1TIdKXkFf+9wTjQwzeH8u+WqudI1Ph3+QDTpPcWBp7Cr7QcZtMU3MLTeoXcQ==
+
 "@rollup/rollup-android-arm-eabi@4.9.1":
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.9.1.tgz#beaf518ee45a196448e294ad3f823d2d4576cf35"

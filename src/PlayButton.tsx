@@ -1,23 +1,25 @@
-import { useState } from 'react'
-import PlayIcon from './icons/PlayIcon';
-import PauseIcon from './icons/PauseIcon';
+import { useEffect, useState } from 'react'
+// import PlayIcon from 'icons/play.svg';
+// import PauseIcon from 'pause.svg';
+
 
 type PlayButtonProps = {
-    playing: boolean
+    playing: boolean,
+    onClick: () => void,
 }
 
-export default function PlayButton({ playing }: PlayButtonProps) {
-
-    const [currentIcon, setCurrentIcon] = useState<'play' | 'pause'>(playing ? 'pause' : 'play');
+export default function PlayButton({ onClick, playing }: PlayButtonProps) {
 
     return (
-        <>
+        <div
+            onClick={onClick}
+        >
             {
-                currentIcon == 'play' ? 
-                <PlayIcon /> : 
-                <PauseIcon />
+                playing ? 
+                <img className='icon' src={'icons/pause.svg'} /> : 
+                <img className='icon' src={'icons/play.svg'} />
             }
-        </>
+        </div>
     )
         
     
