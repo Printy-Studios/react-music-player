@@ -52,7 +52,7 @@ export default function MusicPlayer() {
     return (
         <div className='music-player'>
             <div className='music-player-info'>
-                <img />
+                <img src='cover_art/1.jpg' width='100%'/>
                 <h5>Song name</h5>
                 <h6>Author</h6>
             </div>
