@@ -10,13 +10,12 @@ export default function useMusicPlayer() {
     //setCurrentTime is for local use only, for setting time use updateTime
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [updatedTime, updateTime] = useState(0);
-    // const [storedTime, setStoredTime] = usePersistState<number>(0, 'stored_time');
+
+    const [storedTime, setStoredTime] = usePersistState(0, 'stored_time');
 
     const initialLoad = useRef(true);
     
     const [maxTime, setMaxTime] = useState(0);
-
-    const timeUpdateDeltaSum = useRef(0);
 
     useEffect(() => {
         audio.current.preload = 'metadata';
@@ -32,15 +31,39 @@ export default function useMusicPlayer() {
         audio.current.ontimeupdate = () => {
             //timeUpdateDeltaSum.current += audio.current.currentTime - currentTime;
             //if(timeUpdateDeltaSum.current > )
+            console.log('time update')
+            // console.log(audio.current.currentTime)
             setCurrentTime(audio.current.currentTime)
         }
     }, [])
 
     useEffect(() => {
-        audio.current.src = src;
-        updateTime(0);
-        initialLoad.current = false;
+        console.log(currentTime)
+        if(currentTime != 0 && currentTime != null) {
+            console.log('setting')
+            //localStorage.setItem('stored_time', currentTime.toString());
+            setStoredTime(currentTime);
+        }
         
+    }, [currentTime])
+
+    useEffect(() => {
+        audio.current.src = src;
+
+        const stored_time = parseFloat(localStorage.getItem('stored_time') as string)
+
+        if(storedTime != 0) {
+            console.log('updating')
+            console.log(storedTime)
+            updateTime(storedTime)
+        } else {
+            setStoredTime(0);
+            //localStorage.setItem('stored_time', '0');
+            updateTime(0);
+        }
+        
+        initialLoad.current = false;
+
         if(isPlaying) {
             audio.current.play();
         }
