@@ -5,6 +5,7 @@ import IconButton from './IconButton';
 import TimeDisplay from './TimeDisplay';
 import { percentOf, secondsToMinutesAndSeconds, numberToPercent } from './util';
 import SongsMetadata from './SongMetadata';
+import { usePersistState } from '@printy/react-persist-state'
 
 
 
@@ -18,7 +19,7 @@ export default function MusicPlayer() {
     const [currentTime, setCurrentTime] = useState({minutes: 0, seconds: 0});
     const [maxTime, setMaxTime] = useState({minutes: 0, seconds: 0});
 
-    const [currentSong, setCurrentSong] = useState<number>(0);
+    const [currentSong, setCurrentSong] = usePersistState<number>(0, 'current_song_index');
     const [songsMetadata, setSongsMetadata] = useState<SongsMetadata[]>([]);
 
     const onPlayButtonClick = () => {
@@ -58,18 +59,23 @@ export default function MusicPlayer() {
         setIsSliderActive(false);
     }
 
+    const loadSong = (index: number) => {
+        if(songsMetadata.length) {
+            musicPlayer.setSrc(`songs/${songsMetadata[currentSong].id}.wav`)
+        }
+    }
+
     useEffect(() => {
         fetchSongsMetadata()
     }, [])
 
     useEffect(() => {
-        setCurrentSong(0);
+        // setCurrentSong(0);
+        loadSong(currentSong);
     }, [songsMetadata])
 
     useEffect(() => {
-        if(songsMetadata.length) {
-            musicPlayer.setSrc(`songs/${songsMetadata[currentSong].id}.wav`)
-        }
+        loadSong(currentSong);
     }, [currentSong])
 
     useEffect(() => {
@@ -80,7 +86,6 @@ export default function MusicPlayer() {
     }, [musicPlayer.currentTime])
 
     useEffect(() => {
-        console.log('calculating max time')
         setMaxTime(secondsToMinutesAndSeconds(musicPlayer.maxTime));
     }, [musicPlayer.maxTime])
 

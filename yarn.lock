@@ -432,10 +432,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@printy/react-persist-state@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@printy/react-persist-state/-/react-persist-state-0.0.2.tgz#b88452cfe89431dff1680c5f5a8e279c070e860b"
-  integrity sha512-dw6lv48e9OHn93HcYMF6dzxwoiJnVhinNJt2JgIz0zjkEkVevEWjuS1HHfKAkpBhpSgB2AhPpCMgRi5rnY+U+Q==
+"@printy/react-persist-state@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@printy/react-persist-state/-/react-persist-state-0.0.4.tgz#c63ae76ee764ceacc8e548298ea43019a44f1235"
+  integrity sha512-j8ERiY2iUKSJ1bFqX+bKs+5fsSC6QNcOKSwGHHe7hzqJtRIcuZuwquSOifhGxhgZjrkLFEqkOnjaJ6MF1xYbQQ==
 
 "@printy/react-tab-state@^2.2.1":
   version "2.2.1"

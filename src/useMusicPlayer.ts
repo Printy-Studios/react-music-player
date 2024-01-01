@@ -30,8 +30,6 @@ export default function useMusicPlayer() {
             //if(timeUpdateDeltaSum.current > )
             setCurrentTime(audio.current.currentTime)
         }
-
-        setSrc('songs/1.wav')
     }, [])
 
     useEffect(() => {
