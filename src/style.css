@@ -6,6 +6,15 @@ body, html {
   height: 100vh;
 }
 
+
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .icon {
   width: 32px;
   height: 32px;
@@ -15,11 +24,9 @@ body, html {
   transition: transform 0.1s ease-in-out;
 }
 
-#root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+.player-wrapper {
+  max-width: 400px;
+  width: 100%;
 }
 
 .icon:hover {
@@ -30,15 +37,18 @@ body, html {
   transform: scale(70%);
 }
 
-.player-wrapper {
-  max-width: 280px;
-  width: 100%;
-}
+
 
 .music-player {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
+}
+
+/* Time display */
+
+.time-display {
+  margin-bottom: 2px;
 }
 
 /* Slider */

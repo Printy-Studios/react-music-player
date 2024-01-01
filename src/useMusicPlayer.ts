@@ -6,15 +6,30 @@ export default function useMusicPlayer() {
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [src, setSrc] = useState("");
+    //setCurrentTime is for local use only, for setting time use updateTime
     const [currentTime, setCurrentTime] = useState(0);
+    const [updatedTime, updateTime] = useState(0);
+    
     const [maxTime, setMaxTime] = useState(0);
+
+    const timeUpdateDeltaSum = useRef(0);
 
     useEffect(() => {
         console.log('abc')
         audio.current.preload = 'metadata';
         
-        audio.current.onloadedmetadata = () => {
+        audio.current.ondurationchange = () => {
             setMaxTime(audio.current.duration)
+        }
+
+        audio.current.onended = () => {
+            setIsPlaying(false);
+        }
+
+        audio.current.ontimeupdate = () => {
+            //timeUpdateDeltaSum.current += audio.current.currentTime - currentTime;
+            //if(timeUpdateDeltaSum.current > )
+            setCurrentTime(audio.current.currentTime)
         }
 
         setSrc('songs/1.wav')
@@ -28,8 +43,9 @@ export default function useMusicPlayer() {
     }, [src])
 
     useEffect(() => {
-        audio.current.currentTime = currentTime;
-    }, [currentTime])
+        audio.current.currentTime = updatedTime;
+        setCurrentTime(updatedTime);
+    }, [updatedTime])
 
     useEffect(() => {
         console.log('abc')
@@ -46,6 +62,7 @@ export default function useMusicPlayer() {
         setIsPlaying,
         setCurrentTime,
         currentTime,
+        updateTime,
         maxTime
     }
 }
