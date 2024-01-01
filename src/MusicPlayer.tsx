@@ -61,7 +61,7 @@ export default function MusicPlayer() {
 
     const loadSong = (index: number) => {
         if(songsMetadata.length) {
-            musicPlayer.setSrc(`songs/${songsMetadata[currentSong].id}.wav`)
+            musicPlayer.setSrc(`songs/${songsMetadata[index].id}.wav`)
         }
     }
 

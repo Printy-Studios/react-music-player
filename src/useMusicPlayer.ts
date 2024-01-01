@@ -1,3 +1,4 @@
+import { usePersistState } from '@printy/react-persist-state';
 import { useEffect, useRef, useState } from 'react';
 
 export default function useMusicPlayer() {
@@ -7,8 +8,11 @@ export default function useMusicPlayer() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [src, setSrc] = useState("");
     //setCurrentTime is for local use only, for setting time use updateTime
-    const [currentTime, setCurrentTime] = useState(0);
+    const [currentTime, setCurrentTime] = useState<number>(0);
     const [updatedTime, updateTime] = useState(0);
+    // const [storedTime, setStoredTime] = usePersistState<number>(0, 'stored_time');
+
+    const initialLoad = useRef(true);
     
     const [maxTime, setMaxTime] = useState(0);
 
@@ -35,6 +39,8 @@ export default function useMusicPlayer() {
     useEffect(() => {
         audio.current.src = src;
         updateTime(0);
+        initialLoad.current = false;
+        
         if(isPlaying) {
             audio.current.play();
         }
