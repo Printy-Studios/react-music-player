@@ -15,7 +15,6 @@ export default function useMusicPlayer() {
     const timeUpdateDeltaSum = useRef(0);
 
     useEffect(() => {
-        console.log('abc')
         audio.current.preload = 'metadata';
         
         audio.current.ondurationchange = () => {
@@ -37,8 +36,6 @@ export default function useMusicPlayer() {
 
     useEffect(() => {
         audio.current.src = src;
-        console.log(src)
-        console.log(audio.current.duration);
         setMaxTime(audio.current.duration)
     }, [src])
 
@@ -48,8 +45,6 @@ export default function useMusicPlayer() {
     }, [updatedTime])
 
     useEffect(() => {
-        console.log('abc')
-        console.log(isPlaying)
         if (isPlaying) {
             audio.current.play();
         } else {

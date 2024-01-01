@@ -3,6 +3,7 @@ import PlayButton from './PlayButton'
 import useMusicPlayer from './useMusicPlayer'
 import IconButton from './IconButton';
 import TimeDisplay from './TimeDisplay';
+import { percentOf, secondsToMinutesAndSeconds, numberToPercent } from './util';
 
 export default function MusicPlayer() {
 
@@ -15,7 +16,6 @@ export default function MusicPlayer() {
     const [maxTime, setMaxTime] = useState({minutes: 0, seconds: 0});
 
     const onPlayButtonClick = () => {
-        console.log('ddd')
         musicPlayer.setIsPlaying(!musicPlayer.isPlaying)
     }
 
@@ -33,16 +33,21 @@ export default function MusicPlayer() {
     }
 
     const onSliderMouseUp = () => {
-        const new_time = musicPlayer.maxTime * sliderValue / 100
+        const new_time = percentOf(musicPlayer.maxTime, sliderValue);
         musicPlayer.updateTime(new_time)
         setIsSliderActive(false);
     }
 
     useEffect(() => {
         if(!isSliderActive) {
-            setSliderValue(musicPlayer.currentTime);
+            setSliderValue(numberToPercent(musicPlayer.currentTime, musicPlayer.maxTime));
         }
+        setCurrentTime(secondsToMinutesAndSeconds(musicPlayer.currentTime));
     }, [musicPlayer.currentTime])
+
+    useEffect(() => {
+        setMaxTime(secondsToMinutesAndSeconds(musicPlayer.maxTime));
+    }, [musicPlayer.maxTime])
 
     return (
         <div className='music-player'>
@@ -54,7 +59,7 @@ export default function MusicPlayer() {
             <TimeDisplay time={currentTime} />
             <input 
                 type="range" 
-                min="1" 
+                min="0" 
                 max="100" 
                 value={sliderValue} 
                 className="slider" 

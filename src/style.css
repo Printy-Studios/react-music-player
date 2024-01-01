@@ -49,6 +49,7 @@ body, html {
 
 .time-display {
   margin-bottom: 2px;
+  color: gray;
 }
 
 /* Slider */
