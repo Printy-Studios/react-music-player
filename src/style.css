@@ -56,6 +56,10 @@ body, html {
   gap: 8px;
 }
 
+.music-player img {
+  background-image: url('loading.gif');
+}
+
 /* Music player info */
 
 h5 {

@@ -36,7 +36,10 @@ export default function useMusicPlayer() {
 
     useEffect(() => {
         audio.current.src = src;
-        setMaxTime(audio.current.duration)
+        updateTime(0);
+        if(isPlaying) {
+            audio.current.play();
+        }
     }, [src])
 
     useEffect(() => {
@@ -58,6 +61,7 @@ export default function useMusicPlayer() {
         setCurrentTime,
         currentTime,
         updateTime,
-        maxTime
+        maxTime,
+        setSrc
     }
 }

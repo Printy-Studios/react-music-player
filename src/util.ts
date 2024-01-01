@@ -1,6 +1,11 @@
 export function secondsToMinutesAndSeconds(time: number) {
+    
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time - minutes * 60);
+
+    console.log(time);
+    console.log(minutes);
+    console.log(seconds);
 
     return {
         minutes,
