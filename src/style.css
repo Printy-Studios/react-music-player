@@ -6,14 +6,21 @@ body, html {
   height: 100vh;
 }
 
-
-
 #root {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
 }
+
+
+
+.player-wrapper {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Icons */
 
 .icon {
   width: 32px;
@@ -24,11 +31,6 @@ body, html {
   transition: transform 0.1s ease-in-out;
 }
 
-.player-wrapper {
-  max-width: 400px;
-  width: 100%;
-}
-
 .icon:hover {
   transform: scale(105%);
 }
@@ -37,12 +39,32 @@ body, html {
   transform: scale(70%);
 }
 
-
+/* Music player */
 
 .music-player {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.music-player-controls {
+  display: flex;
   align-items: center;
   gap: 8px;
+}
+
+/* Music player info */
+
+h5 {
+  font-size: 16px;
+  margin: 0px;
+}
+
+h6 {
+  font-size: 14px;
+  margin: 0px;
+  font-weight: normal;
+  color: gray;
 }
 
 /* Time display */

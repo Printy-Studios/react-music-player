@@ -51,26 +51,33 @@ export default function MusicPlayer() {
 
     return (
         <div className='music-player'>
-            <IconButton
-                onClick={onPrevButtonClick}
-                src={'icons/prev.svg'}
-            />
-            <PlayButton onClick={onPlayButtonClick} playing={musicPlayer.isPlaying} />
-            <TimeDisplay time={currentTime} />
-            <input 
-                type="range" 
-                min="0" 
-                max="100" 
-                value={sliderValue} 
-                className="slider" 
-                onMouseUp={onSliderMouseUp}
-                onChange={onSliderChange}
-            />
-            <TimeDisplay time={maxTime} />
-            <IconButton
-                onClick={onPrevButtonClick}
-                src={'icons/next.svg'}
-            />
+            <div className='music-player-info'>
+                <img />
+                <h5>Song name</h5>
+                <h6>Author</h6>
+            </div>
+            <div className='music-player-controls'>
+                <IconButton
+                    onClick={onPrevButtonClick}
+                    src={'icons/prev.svg'}
+                />
+                <PlayButton onClick={onPlayButtonClick} playing={musicPlayer.isPlaying} />
+                <TimeDisplay time={currentTime} />
+                <input 
+                    type="range" 
+                    min="0" 
+                    max="100" 
+                    value={sliderValue} 
+                    className="slider" 
+                    onMouseUp={onSliderMouseUp}
+                    onChange={onSliderChange}
+                />
+                <TimeDisplay time={maxTime} />
+                <IconButton
+                    onClick={onPrevButtonClick}
+                    src={'icons/next.svg'}
+                />
+            </div>
         </div>
     )
 
