@@ -1,21 +1,59 @@
 import { usePersistState } from '@printy/react-persist-state';
+import useTabState from '@printy/react-tab-state';
 import { useEffect, useRef, useState } from 'react';
+
+const worker = new SharedWorker("/worker.js");
+
+console.log(worker)
 
 export default function useMusicPlayer() {
 
     const audio = useRef(document.createElement('audio'));
 
     const [isPlaying, setIsPlaying] = useState(false);
-    const [src, setSrc] = useState("");
+    const [src, setSrc] = useState<string>("");
     //setCurrentTime is for local use only, for setting time use updateTime
     const [currentTime, setCurrentTime] = useState<number>(0);
-    const [updatedTime, updateTime] = useState(0);
+    const [updatedTime, updateTime] = useTabState(0, 'updated_time');
+
+    const [isMainTab, setIsMainTab] = useState<boolean>(false);
 
     const [storedTime, setStoredTime] = usePersistState(0, 'stored_time');
 
     const initialLoad = useRef(true);
     
     const [maxTime, setMaxTime] = useState(0);
+
+    useEffect(() => {
+        console.log(updatedTime)
+    }, [updatedTime])
+
+    useEffect(() => {
+        worker.port.start();
+
+        setInterval(() => {
+            worker.port.postMessage({
+                type: "ping"
+            });
+        }, 1000)
+
+        worker.port.onmessage = (e) => {
+            const data = e.data;
+            //console.log(data);
+            switch(data.type) {
+                case 'set_main_port': {
+                    setIsMainTab(true);
+                    break;
+                }
+                case 'unset_main_port': {
+                    setIsMainTab(false);
+                    break;
+                }
+            }
+        }
+
+
+    }, [])
 
     useEffect(() => {
         audio.current.preload = 'metadata';
@@ -31,16 +69,12 @@ export default function useMusicPlayer() {
         audio.current.ontimeupdate = () => {
             //timeUpdateDeltaSum.current += audio.current.currentTime - currentTime;
             //if(timeUpdateDeltaSum.current > )
-            console.log('time update')
-            // console.log(audio.current.currentTime)
             setCurrentTime(audio.current.currentTime)
         }
     }, [])
 
     useEffect(() => {
-        console.log(currentTime)
         if(currentTime != 0 && currentTime != null) {
-            console.log('setting')
             //localStorage.setItem('stored_time', currentTime.toString());
             setStoredTime(currentTime);
         }
@@ -48,13 +82,8 @@ export default function useMusicPlayer() {
     }, [currentTime])
 
     useEffect(() => {
-        audio.current.src = src;
-
-        const stored_time = parseFloat(localStorage.getItem('stored_time') as string)
-
-        if(storedTime != 0) {
-            console.log('updating')
-            console.log(storedTime)
+    
+        if(!audio.current.src || audio.current.src == '' && storedTime != 0) {
             updateTime(storedTime)
         } else {
             setStoredTime(0);
@@ -62,9 +91,16 @@ export default function useMusicPlayer() {
             updateTime(0);
         }
         
+        if(src == "") {
+            //audio.current.removeAttribute('src');
+        } else {
+            audio.current.src = src;
+        }
+    
+
         initialLoad.current = false;
 
-        if(isPlaying) {
+        if(isPlaying && isMainTab) {
             audio.current.play();
         }
     }, [src])
@@ -75,7 +111,7 @@ export default function useMusicPlayer() {
     }, [updatedTime])
 
     useEffect(() => {
-        if (isPlaying) {
+        if (isPlaying && isMainTab) {
             audio.current.play();
         } else {
             audio.current.pause();

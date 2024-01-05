@@ -80,10 +80,15 @@ export default function MusicPlayer() {
 
     useEffect(() => {
         if(!isSliderActive) {
-            setSliderValue(numberToPercent(musicPlayer.currentTime, musicPlayer.maxTime));
+            if(!musicPlayer.currentTime || !musicPlayer.maxTime) {
+                setSliderValue(0)
+            } else {
+                setSliderValue(numberToPercent(musicPlayer.currentTime, musicPlayer.maxTime));
+            }
+            
         }
         setCurrentTime(secondsToMinutesAndSeconds(musicPlayer.currentTime));
-    }, [musicPlayer.currentTime])
+    }, [musicPlayer.currentTime, musicPlayer.maxTime])
 
     useEffect(() => {
         setMaxTime(secondsToMinutesAndSeconds(musicPlayer.maxTime));
