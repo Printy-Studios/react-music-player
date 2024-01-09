@@ -10,7 +10,7 @@ export default function useMusicPlayer() {
 
     const audio = useRef(document.createElement('audio'));
 
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useTabState(false, 'is_playing');
     const [src, setSrc] = useState<string>("");
     //setCurrentTime is for local use only, for setting time use updateTime
     const [currentTime, setCurrentTime] = useTabState<number>(0, 'current_time');
@@ -19,8 +19,6 @@ export default function useMusicPlayer() {
     const [isMainTab, setIsMainTab] = useState<boolean>(false);
 
     const [storedTime, setStoredTime] = usePersistState(0, 'stored_time');
-
-    const initialLoad = useRef(true);
     
     const [maxTime, setMaxTime] = useState(0);
 
@@ -42,6 +40,7 @@ export default function useMusicPlayer() {
             //console.log(data);
             switch(data.type) {
                 case 'set_main_port': {
+                    console.log('setting to main')
                     setIsMainTab(true);
                     break;
                 }
@@ -96,9 +95,6 @@ export default function useMusicPlayer() {
         } else {
             audio.current.src = src;
         }
-    
-
-        initialLoad.current = false;
 
         if(isPlaying && isMainTab) {
             audio.current.play();
@@ -112,6 +108,7 @@ export default function useMusicPlayer() {
 
     useEffect(() => {
         if (isPlaying && isMainTab) {
+            // console.log('is main')
             audio.current.play();
         } else {
             audio.current.pause();

@@ -6,6 +6,7 @@ import TimeDisplay from './TimeDisplay';
 import { percentOf, secondsToMinutesAndSeconds, numberToPercent } from './util';
 import SongsMetadata from './SongMetadata';
 import { usePersistState } from '@printy/react-persist-state'
+import { useTabStateControl } from '@printy/react-tab-state'
 
 
 
@@ -19,7 +20,8 @@ export default function MusicPlayer() {
     const [currentTime, setCurrentTime] = useState({minutes: 0, seconds: 0});
     const [maxTime, setMaxTime] = useState({minutes: 0, seconds: 0});
 
-    const [currentSong, setCurrentSong] = usePersistState<number>(0, 'current_song_index');
+    const [currentSong, setCurrentSongLocal] = usePersistState<number>(0, 'current_song_index');
+    const setCurrentSong: (new_state: number) => void = useTabStateControl(currentSong, setCurrentSongLocal, 0, 'current_song_index')
     const [songsMetadata, setSongsMetadata] = useState<SongsMetadata[]>([]);
 
     const onPlayButtonClick = () => {
