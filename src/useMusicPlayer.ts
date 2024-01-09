@@ -58,8 +58,6 @@ export default function useMusicPlayer() {
         }
 
         audio.current.ontimeupdate = () => {
-            //timeUpdateDeltaSum.current += audio.current.currentTime - currentTime;
-            //if(timeUpdateDeltaSum.current > )
             setCurrentTime(audio.current.currentTime)
         }
 
@@ -67,10 +65,8 @@ export default function useMusicPlayer() {
 
     useEffect(() => {
         if(currentTime != 0 && currentTime != null) {
-            //localStorage.setItem('stored_time', currentTime.toString());
             setStoredTime(currentTime);
         }
-        
     }, [currentTime])
 
     useEffect(() => {
