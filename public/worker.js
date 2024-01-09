@@ -22,11 +22,8 @@ const setMainPort = (port) => {
     
 }
 
-//const ping_intervals = []
-
 // Ping check
 setInterval(() => {
-    postMessageAll('checking: ' + pinged)
     if(!pinged) {
         const port_index = ports.findIndex(_port => _port == main_port);
         ports.splice(port_index, 1);

@@ -75,13 +75,10 @@ export default function useMusicPlayer() {
             updateTime(storedTime)
         } else {
             setStoredTime(0);
-            //localStorage.setItem('stored_time', '0');
             updateTime(0);
         }
         
-        if(src == "") {
-            //audio.current.removeAttribute('src');
-        } else {
+        if(src != "") {
             audio.current.src = src;
         }
 
