@@ -13,8 +13,8 @@ export default function useMusicPlayer() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [src, setSrc] = useState<string>("");
     //setCurrentTime is for local use only, for setting time use updateTime
-    const [currentTime, setCurrentTime] = useState<number>(0);
-    const [updatedTime, updateTime] = useTabState(0, 'updated_time');
+    const [currentTime, setCurrentTime] = useTabState<number>(0, 'current_time');
+    const [updatedTime, updateTime] = useState(0);
 
     const [isMainTab, setIsMainTab] = useState<boolean>(false);
 
