@@ -23,10 +23,6 @@ export default function useMusicPlayer() {
     const [maxTime, setMaxTime] = useState(0);
 
     useEffect(() => {
-        console.log(updatedTime)
-    }, [updatedTime])
-
-    useEffect(() => {
         worker.port.start();
 
         setInterval(() => {
@@ -51,10 +47,6 @@ export default function useMusicPlayer() {
             }
         }
 
-
-    }, [])
-
-    useEffect(() => {
         audio.current.preload = 'metadata';
         
         audio.current.ondurationchange = () => {
@@ -70,6 +62,7 @@ export default function useMusicPlayer() {
             //if(timeUpdateDeltaSum.current > )
             setCurrentTime(audio.current.currentTime)
         }
+
     }, [])
 
     useEffect(() => {
